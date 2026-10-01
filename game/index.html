@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Galaxian - Classic Arcade</title>
+
+    <!-- HUBUNGKAN CSS DI SINI -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- STRUKTUR HTML (dari Modul 2) -->
+    <div id="game-wrapper">
+        <div id="game-container">
+            <div id="hud">
+                <span id="score-display">SCORE: 0000</span>
+                <span id="wave-display">WAVE: 1</span>
+                <span id="hi-display">HI: 0000</span>
+                <span id="lives-display">♥ 3</span>
+            </div>
+            <canvas id="gameCanvas" width="500" height="600"></canvas>
+            <div id="overlay">
+                <h1>GALAXIAN</h1>
+                <h2>CLASSIC ARCADE</h2>
+                <p>Tembak alien sebelum mereka mencapai Anda!</p>
+                <button id="start-btn">START GAME</button>
+            </div>
+        </div>
+        <div id="touch-controls">
+            <div class="dpad">
+                <button class="ctrl-btn" id="btn-left">◀</button>
+                <button class="ctrl-btn" id="btn-right">▶</button>
+            </div>
+            <button class="ctrl-btn fire-btn" id="btn-fire">FIRE</button>
+        </div>
+    </div>
+
+    <!-- HUBUNGKAN JS DI SINI (SEBELUM </body>) -->
+    <script src="game.js"></script>
+</body>
+</html>

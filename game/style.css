@@ -1,0 +1,195 @@
+/* 1. DEFINISI VARIABLE WARNA (TEMA NEON) */
+:root {
+    --neon-green: #00ff00;
+    --neon-red: #ff0055;
+    --neon-cyan: #00ffff;
+    --neon-yellow: #ffff00;
+    --bg-dark: #050505;
+    --hud-bg: #0a0a0a;
+}
+
+/* 2. RESET & MOBILE LOCK */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Mencegah scroll bar muncul */
+    touch-action: none; /* Mencegah zoom/scroll di HP */
+    user-select: none; /* Mencegah teks terblok saat main */
+    background-color: #000;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--neon-green);
+}
+
+/* WRAPPER UTAMA */
+#game-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; /* Lebar maksimal seperti HP */
+    height: 100vh; /* Tinggi memenuhi layar */
+    margin: 0 auto; /* Posisi tengah horizontal */
+    box-sizing: border-box;
+}
+
+/* CONTAINER GAME (HUD + CANVAS + OVERLAY) */
+#game-container {
+    position: relative; /* Wajib agar #overlay terkunci di dalam container ini */
+    flex: 1; /* Mengisi sisa ruang yang ada */
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); /* Efek Glow Neon */
+    background-color: var(--bg-dark);
+    overflow: hidden;
+}
+
+/* HUD (SKOR & NYAWA) */
+#hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: var(--hud-bg);
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+    z-index: 5;
+}
+
+/* CANVAS */
+canvas {
+    display: block;
+    flex: 1; /* Canvas mengisi ruang sisa di dalam container */
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    image-rendering: pixelated; /* Agar grafik pixel tidak blur */
+}
+
+/* OVERLAY (LAYAR START / GAME OVER) */
+#overlay {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.88); /* Latar gelap transparan */
+    z-index: 10; /* Pastikan selalu di paling atas */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#overlay h1 {
+    font-size: 36px;
+    margin: 0 0 5px 0;
+    color: var(--neon-yellow);
+    text-shadow: 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow);
+    letter-spacing: 3px;
+}
+
+#overlay h2 {
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px var(--neon-cyan);
+    letter-spacing: 2px;
+}
+
+#overlay p {
+    font-size: 14px;
+    margin-bottom: 30px;
+    color: #fff;
+    line-height: 1.4;
+}
+
+/* TOMBOL START GAME */
+#start-btn {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    color: var(--bg-dark);
+    background-color: var(--neon-green);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 15px var(--neon-green);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+#start-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 25px var(--neon-green);
+}
+
+/* TOUCH CONTROLS (TOMBOL VIRTUAL MOBILE) */
+#touch-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #000;
+    border-top: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+.dpad {
+    display: flex;
+    gap: 15px;
+}
+
+/* Tombol kontrol dasar */
+.ctrl-btn {
+    width: 65px;
+    height: 65px;
+    background-color: #0a1a0a;
+    border: 2px solid var(--neon-green);
+    border-radius: 8px;
+    color: var(--neon-green);
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    text-shadow: 0 0 4px var(--neon-green);
+    transition: all 0.1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* EFEK SAAT TOMBOL DITEKAN */
+.ctrl-btn:active, .ctrl-btn.active {
+    background-color: var(--neon-green);
+    color: #000;
+    transform: scale(0.95);
+    box-shadow: 0 0 20px var(--neon-green);
+}
+
+/* TOMBOL FIRE (KHUSUS) */
+.ctrl-btn.fire-btn {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border-color: var(--neon-red);
+    color: var(--neon-red);
+    font-size: 14px;
+    box-shadow: 0 0 12px rgba(255, 0, 85, 0.4);
+    text-shadow: 0 0 5px var(--neon-red);
+}
+
+.ctrl-btn.fire-btn:active, .ctrl-btn.fire-btn.active {
+    background-color: var(--neon-red);
+    color: #fff;
+    box-shadow: 0 0 25px var(--neon-red);
+}
+
+/* MENYEMBUNYIKAN OVERLAY SAAT GAME MULAI */
+.hidden {
+    display: none !important;
+}
